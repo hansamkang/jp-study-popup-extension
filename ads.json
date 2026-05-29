@@ -1,0 +1,17 @@
+[
+  {
+    "title": "추천 JLPT 단어장",
+    "description": "매일 10분씩 일본어 단어를 복습해 보세요.",
+    "url": "https://example.com/jlpt-vocab"
+  },
+  {
+    "title": "광고 일본어 노트",
+    "description": "드래그한 표현을 정리할 학습 노트를 준비해 보세요.",
+    "url": "https://example.com/japanese-note"
+  },
+  {
+    "title": "추천 일본어 문법책",
+    "description": "헷갈리는 문법을 예문과 함께 다시 확인하세요.",
+    "url": "https://example.com/japanese-grammar"
+  }
+]

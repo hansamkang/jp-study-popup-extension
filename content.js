@@ -1,23 +1,8 @@
 (() => {
   const POPUP_ID = "jp-study-popup-translator";
   const NAVER_BASE = "https://ja.dict.naver.com/#/search?query=";
-  const ADS = [
-    {
-      title: "추천 JLPT 단어장",
-      description: "매일 10분씩 일본어 단어를 복습해 보세요.",
-      url: "https://example.com/jlpt-vocab"
-    },
-    {
-      title: "광고 일본어 노트",
-      description: "드래그한 표현을 정리할 학습 노트를 준비해 보세요.",
-      url: "https://example.com/japanese-note"
-    },
-    {
-      title: "추천 일본어 문법책",
-      description: "헷갈리는 문법을 예문과 함께 다시 확인하세요.",
-      url: "https://example.com/japanese-grammar"
-    }
-  ];
+  const ADS_URL = chrome.runtime.getURL("ads.json");
+  let adsCache = null;
   let timer = null;
   let lastText = "";
 
@@ -34,8 +19,8 @@
     if (old) old.remove();
   }
 
-  function getRandomAd() {
-    return ADS[Math.floor(Math.random() * ADS.length)];
+  function getRandomAd(ads) {
+    return ads[Math.floor(Math.random() * ads.length)];
   }
 
   function hideAd(popup) {
@@ -43,14 +28,40 @@
     if (adLink) adLink.hidden = true;
   }
 
-  function setupAd(popup) {
+  function isValidAd(ad) {
+    return ad && ad.title && ad.description && ad.url;
+  }
+
+  async function loadAds() {
+    if (adsCache) return adsCache;
+
+    const response = await fetch(ADS_URL);
+    if (!response.ok) {
+      throw new Error(`Failed to load ads.json: ${response.status}`);
+    }
+
+    const ads = await response.json();
+    if (!Array.isArray(ads)) {
+      throw new Error("ads.json must contain an array");
+    }
+
+    adsCache = ads.filter(isValidAd);
+    if (adsCache.length === 0) {
+      throw new Error("ads.json does not contain usable ads");
+    }
+
+    return adsCache;
+  }
+
+  async function setupAd(popup) {
     try {
-      const ad = getRandomAd();
+      const ads = await loadAds();
+      const ad = getRandomAd(ads);
       const adLink = popup.querySelector(".jp-study-ad");
       const adTitle = popup.querySelector(".jp-study-ad-title");
       const adDescription = popup.querySelector(".jp-study-ad-description");
 
-      if (!ad || !ad.url || !adLink || !adTitle || !adDescription) {
+      if (!ad || !adLink || !adTitle || !adDescription) {
         throw new Error("Ad area is unavailable");
       }
 
