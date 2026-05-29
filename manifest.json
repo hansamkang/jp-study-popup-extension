@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "JP Study Popup Translator",
+  "name": "일본어 드래그 번역",
   "version": "0.3.0",
-  "description": "Drag Japanese text to show a Korean translation popup with a Naver Japanese dictionary link.",
+  "description": "웹페이지에서 일본어를 드래그하면 한국어 번역 팝업과 네이버 일본어 사전 링크를 보여주는 Chrome 확장 프로그램입니다.",
   "permissions": ["storage"],
   "host_permissions": [
     "https://translate.googleapis.com/*",
