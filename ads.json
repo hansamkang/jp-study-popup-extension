@@ -1,17 +1,22 @@
 [
   {
-    "title": "추천 JLPT 단어장",
-    "description": "매일 10분씩 일본어 단어를 복습해 보세요.",
-    "url": "https://example.com/jlpt-vocab"
+    "title": "JLPT 단어장 추천",
+    "description": "자주 나오는 단어를 빠르게 복습해보세요.",
+    "url": "https://link.coupang.com/a/d8ZJkrK4DQ"
   },
   {
-    "title": "광고 일본어 노트",
-    "description": "드래그한 표현을 정리할 학습 노트를 준비해 보세요.",
-    "url": "https://example.com/japanese-note"
+    "title": "일본어 문법책 추천",
+    "description": "헷갈리는 문법을 예문과 함께 다시 확인해보세요.",
+    "url": "https://link.coupang.com/a/d8Z8cMCBhI"
   },
   {
-    "title": "추천 일본어 문법책",
-    "description": "헷갈리는 문법을 예문과 함께 다시 확인하세요.",
-    "url": "https://example.com/japanese-grammar"
+    "title": "일본어 회화책 추천",
+    "description": "실생활 표현을 가볍게 익혀보세요.",
+    "url": "https://link.coupang.com/a/d8Z9nWkHg4"
+  },
+  {
+    "title": "JLPT 시험 대비 추천",
+    "description": "시험 전 빠르게 정리하기 좋은 교재입니다.",
+    "url": "https://link.coupang.com/a/d80axUHdLg"
   }
 ]
