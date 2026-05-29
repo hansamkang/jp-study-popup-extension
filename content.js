@@ -38,6 +38,32 @@
     return ADS[Math.floor(Math.random() * ADS.length)];
   }
 
+  function hideAd(popup) {
+    const adLink = popup.querySelector(".jp-study-ad");
+    if (adLink) adLink.hidden = true;
+  }
+
+  function setupAd(popup) {
+    try {
+      const ad = getRandomAd();
+      const adLink = popup.querySelector(".jp-study-ad");
+      const adTitle = popup.querySelector(".jp-study-ad-title");
+      const adDescription = popup.querySelector(".jp-study-ad-description");
+
+      if (!ad || !ad.url || !adLink || !adTitle || !adDescription) {
+        throw new Error("Ad area is unavailable");
+      }
+
+      adLink.href = ad.url;
+      adTitle.textContent = ad.title;
+      adDescription.textContent = ad.description;
+      adLink.hidden = false;
+    } catch (err) {
+      console.warn("[JP Study Popup] 광고 영역을 표시하지 못했습니다.", err);
+      hideAd(popup);
+    }
+  }
+
   function getSelectionRect() {
     const sel = window.getSelection();
     if (!sel || sel.rangeCount === 0) return null;
@@ -62,7 +88,6 @@
   function createPopup(text, rect) {
     removePopup();
 
-    const ad = getRandomAd();
     const popup = document.createElement("div");
     popup.id = POPUP_ID;
     popup.innerHTML = `
@@ -75,7 +100,7 @@
         <a class="jp-study-naver" target="_blank" rel="noopener noreferrer">네이버 사전</a>
         <button class="jp-study-copy">복사</button>
       </div>
-      <a class="jp-study-ad" target="_blank" rel="noopener noreferrer" aria-label="광고">
+      <a class="jp-study-ad" target="_blank" rel="noopener noreferrer" aria-label="광고" hidden>
         <span class="jp-study-ad-label">광고</span>
         <span class="jp-study-ad-body">
           <span class="jp-study-ad-title"></span>
@@ -87,9 +112,6 @@
 
     popup.querySelector(".jp-study-word").textContent = text;
     popup.querySelector(".jp-study-naver").href = NAVER_BASE + encodeURIComponent(text);
-    popup.querySelector(".jp-study-ad").href = ad.url;
-    popup.querySelector(".jp-study-ad-title").textContent = ad.title;
-    popup.querySelector(".jp-study-ad-description").textContent = ad.description;
     popup.querySelector(".jp-study-close").addEventListener("click", removePopup);
     popup.querySelector(".jp-study-copy").addEventListener("click", async () => {
       try {
@@ -137,9 +159,12 @@
 
     const popup = createPopup(text, rect);
     const result = popup.querySelector(".jp-study-result");
+    const translation = requestTranslation(text);
+
+    setupAd(popup);
 
     try {
-      const translated = await requestTranslation(text);
+      const translated = await translation;
       if (!document.body.contains(popup)) return;
       result.textContent = translated;
     } catch (err) {
