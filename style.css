@@ -87,6 +87,8 @@
   background: #f9fafb;
   border: 1px solid #e5e7eb;
   color: #4b5563;
+  text-decoration: none;
+  cursor: pointer;
 }
 
 #jp-study-popup-translator .jp-study-ad-label {
@@ -100,9 +102,22 @@
   line-height: 1.4;
 }
 
-#jp-study-popup-translator .jp-study-ad-copy {
+#jp-study-popup-translator .jp-study-ad-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+#jp-study-popup-translator .jp-study-ad-title {
   font-size: 12px;
+  font-weight: 700;
+  color: #374151;
+}
+
+#jp-study-popup-translator .jp-study-ad-description {
+  font-size: 11px;
   line-height: 1.35;
+  color: #6b7280;
   word-break: keep-all;
 }
 

@@ -1,6 +1,23 @@
 (() => {
   const POPUP_ID = "jp-study-popup-translator";
   const NAVER_BASE = "https://ja.dict.naver.com/#/search?query=";
+  const ADS = [
+    {
+      title: "추천 JLPT 단어장",
+      description: "매일 10분씩 일본어 단어를 복습해 보세요.",
+      url: "https://example.com/jlpt-vocab"
+    },
+    {
+      title: "광고 일본어 노트",
+      description: "드래그한 표현을 정리할 학습 노트를 준비해 보세요.",
+      url: "https://example.com/japanese-note"
+    },
+    {
+      title: "추천 일본어 문법책",
+      description: "헷갈리는 문법을 예문과 함께 다시 확인하세요.",
+      url: "https://example.com/japanese-grammar"
+    }
+  ];
   let timer = null;
   let lastText = "";
 
@@ -15,6 +32,10 @@
   function removePopup() {
     const old = document.getElementById(POPUP_ID);
     if (old) old.remove();
+  }
+
+  function getRandomAd() {
+    return ADS[Math.floor(Math.random() * ADS.length)];
   }
 
   function getSelectionRect() {
@@ -41,6 +62,7 @@
   function createPopup(text, rect) {
     removePopup();
 
+    const ad = getRandomAd();
     const popup = document.createElement("div");
     popup.id = POPUP_ID;
     popup.innerHTML = `
@@ -53,15 +75,21 @@
         <a class="jp-study-naver" target="_blank" rel="noopener noreferrer">네이버 사전</a>
         <button class="jp-study-copy">복사</button>
       </div>
-      <div class="jp-study-ad" role="note" aria-label="광고">
-        <span class="jp-study-ad-label">AD</span>
-        <span class="jp-study-ad-copy">JLPT 단어장으로 오늘의 일본어 복습을 이어가세요.</span>
-      </div>
+      <a class="jp-study-ad" target="_blank" rel="noopener noreferrer" aria-label="광고">
+        <span class="jp-study-ad-label">광고</span>
+        <span class="jp-study-ad-body">
+          <span class="jp-study-ad-title"></span>
+          <span class="jp-study-ad-description"></span>
+        </span>
+      </a>
       <div class="jp-study-version">v0.3 한국어 번역</div>
     `;
 
     popup.querySelector(".jp-study-word").textContent = text;
     popup.querySelector(".jp-study-naver").href = NAVER_BASE + encodeURIComponent(text);
+    popup.querySelector(".jp-study-ad").href = ad.url;
+    popup.querySelector(".jp-study-ad-title").textContent = ad.title;
+    popup.querySelector(".jp-study-ad-description").textContent = ad.description;
     popup.querySelector(".jp-study-close").addEventListener("click", removePopup);
     popup.querySelector(".jp-study-copy").addEventListener("click", async () => {
       try {
