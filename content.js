@@ -53,6 +53,10 @@
         <a class="jp-study-naver" target="_blank" rel="noopener noreferrer">네이버 사전</a>
         <button class="jp-study-copy">복사</button>
       </div>
+      <div class="jp-study-ad" role="note" aria-label="광고">
+        <span class="jp-study-ad-label">AD</span>
+        <span class="jp-study-ad-copy">JLPT 단어장으로 오늘의 일본어 복습을 이어가세요.</span>
+      </div>
       <div class="jp-study-version">v0.3 한국어 번역</div>
     `;
 
