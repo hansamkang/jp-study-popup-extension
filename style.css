@@ -1,4 +1,4 @@
-#jp-study-popup-translator {
+#japanese-drag-translate-popup {
   position: absolute;
   z-index: 2147483647;
   width: 300px;
@@ -14,7 +14,7 @@
   line-height: 1.45;
 }
 
-#jp-study-popup-translator .jp-study-header {
+#japanese-drag-translate-popup .jdt-header {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -22,13 +22,13 @@
   margin-bottom: 8px;
 }
 
-#jp-study-popup-translator .jp-study-word {
+#japanese-drag-translate-popup .jdt-word {
   font-weight: 700;
   font-size: 15px;
   word-break: break-word;
 }
 
-#jp-study-popup-translator .jp-study-close {
+#japanese-drag-translate-popup .jdt-close {
   border: 0;
   background: transparent;
   color: #6b7280;
@@ -38,7 +38,7 @@
   padding: 0 2px;
 }
 
-#jp-study-popup-translator .jp-study-result {
+#japanese-drag-translate-popup .jdt-result {
   min-height: 24px;
   padding: 8px 10px;
   border-radius: 10px;
@@ -46,14 +46,14 @@
   word-break: break-word;
 }
 
-#jp-study-popup-translator .jp-study-actions {
+#japanese-drag-translate-popup .jdt-actions {
   display: flex;
   gap: 8px;
   margin-top: 10px;
 }
 
-#jp-study-popup-translator .jp-study-naver,
-#jp-study-popup-translator .jp-study-copy {
+#japanese-drag-translate-popup .jdt-naver,
+#japanese-drag-translate-popup .jdt-copy {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -65,19 +65,19 @@
   cursor: pointer;
 }
 
-#jp-study-popup-translator .jp-study-naver {
+#japanese-drag-translate-popup .jdt-naver {
   background: #03c75a;
   color: #ffffff;
   border: 1px solid #03c75a;
 }
 
-#jp-study-popup-translator .jp-study-copy {
+#japanese-drag-translate-popup .jdt-copy {
   background: #ffffff;
   color: #374151;
   border: 1px solid #d1d5db;
 }
 
-#jp-study-popup-translator .jp-study-ad {
+#japanese-drag-translate-popup .jdt-ad {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -91,7 +91,7 @@
   cursor: pointer;
 }
 
-#jp-study-popup-translator .jp-study-ad-label {
+#japanese-drag-translate-popup .jdt-ad-label {
   flex: 0 0 auto;
   padding: 1px 5px;
   border-radius: 999px;
@@ -102,26 +102,26 @@
   line-height: 1.4;
 }
 
-#jp-study-popup-translator .jp-study-ad-body {
+#japanese-drag-translate-popup .jdt-ad-body {
   display: flex;
   flex-direction: column;
   gap: 1px;
 }
 
-#jp-study-popup-translator .jp-study-ad-title {
+#japanese-drag-translate-popup .jdt-ad-title {
   font-size: 12px;
   font-weight: 700;
   color: #374151;
 }
 
-#jp-study-popup-translator .jp-study-ad-description {
+#japanese-drag-translate-popup .jdt-ad-description {
   font-size: 11px;
   line-height: 1.35;
   color: #6b7280;
   word-break: keep-all;
 }
 
-.jp-study-version {
+.jdt-version {
   margin-top: 6px;
   font-size: 10px;
   color: #888;

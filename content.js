@@ -1,5 +1,5 @@
 (() => {
-  const POPUP_ID = "jp-study-popup-translator";
+  const POPUP_ID = "japanese-drag-translate-popup";
   const NAVER_BASE = "https://ja.dict.naver.com/#/search?query=";
   const ADS_URL = chrome.runtime.getURL("ads.json");
   let adsCache = null;
@@ -24,7 +24,7 @@
   }
 
   function hideAd(popup) {
-    const adLink = popup.querySelector(".jp-study-ad");
+    const adLink = popup.querySelector(".jdt-ad");
     if (adLink) adLink.hidden = true;
   }
 
@@ -57,9 +57,9 @@
     try {
       const ads = await loadAds();
       const ad = getRandomAd(ads);
-      const adLink = popup.querySelector(".jp-study-ad");
-      const adTitle = popup.querySelector(".jp-study-ad-title");
-      const adDescription = popup.querySelector(".jp-study-ad-description");
+      const adLink = popup.querySelector(".jdt-ad");
+      const adTitle = popup.querySelector(".jdt-ad-title");
+      const adDescription = popup.querySelector(".jdt-ad-description");
 
       if (!ad || !adLink || !adTitle || !adDescription) {
         throw new Error("Ad area is unavailable");
@@ -70,7 +70,7 @@
       adDescription.textContent = ad.description;
       adLink.hidden = false;
     } catch (err) {
-      console.warn("[JP Study Popup] 광고 영역을 표시하지 못했습니다.", err);
+      console.warn("[일본어 드래그 번역] 광고 영역을 표시하지 못했습니다.", err);
       hideAd(popup);
     }
   }
@@ -102,34 +102,34 @@
     const popup = document.createElement("div");
     popup.id = POPUP_ID;
     popup.innerHTML = `
-      <div class="jp-study-header">
-        <div class="jp-study-word"></div>
-        <button class="jp-study-close" title="닫기">×</button>
+      <div class="jdt-header">
+        <div class="jdt-word"></div>
+        <button class="jdt-close" title="닫기">×</button>
       </div>
-      <div class="jp-study-result">한국어 번역 중...</div>
-      <div class="jp-study-actions">
-        <a class="jp-study-naver" target="_blank" rel="noopener noreferrer">네이버 사전</a>
-        <button class="jp-study-copy">복사</button>
+      <div class="jdt-result">한국어 번역 중...</div>
+      <div class="jdt-actions">
+        <a class="jdt-naver" target="_blank" rel="noopener noreferrer">네이버 사전</a>
+        <button class="jdt-copy">복사</button>
       </div>
-      <a class="jp-study-ad" target="_blank" rel="noopener noreferrer" aria-label="광고" hidden>
-        <span class="jp-study-ad-label">광고</span>
-        <span class="jp-study-ad-body">
-          <span class="jp-study-ad-title"></span>
-          <span class="jp-study-ad-description"></span>
+      <a class="jdt-ad" target="_blank" rel="noopener noreferrer" aria-label="광고" hidden>
+        <span class="jdt-ad-label">광고</span>
+        <span class="jdt-ad-body">
+          <span class="jdt-ad-title"></span>
+          <span class="jdt-ad-description"></span>
         </span>
       </a>
-      <div class="jp-study-version">v0.3 한국어 번역</div>
+      <div class="jdt-version">일본어 드래그 번역 v0.3</div>
     `;
 
-    popup.querySelector(".jp-study-word").textContent = text;
-    popup.querySelector(".jp-study-naver").href = NAVER_BASE + encodeURIComponent(text);
-    popup.querySelector(".jp-study-close").addEventListener("click", removePopup);
-    popup.querySelector(".jp-study-copy").addEventListener("click", async () => {
+    popup.querySelector(".jdt-word").textContent = text;
+    popup.querySelector(".jdt-naver").href = NAVER_BASE + encodeURIComponent(text);
+    popup.querySelector(".jdt-close").addEventListener("click", removePopup);
+    popup.querySelector(".jdt-copy").addEventListener("click", async () => {
       try {
         await navigator.clipboard.writeText(text);
-        popup.querySelector(".jp-study-copy").textContent = "복사됨";
+        popup.querySelector(".jdt-copy").textContent = "복사됨";
         setTimeout(() => {
-          const btn = popup.querySelector(".jp-study-copy");
+          const btn = popup.querySelector(".jdt-copy");
           if (btn) btn.textContent = "복사";
         }, 900);
       } catch (_) {}
@@ -169,7 +169,7 @@
     lastText = text;
 
     const popup = createPopup(text, rect);
-    const result = popup.querySelector(".jp-study-result");
+    const result = popup.querySelector(".jdt-result");
     const translation = requestTranslation(text);
 
     setupAd(popup);
